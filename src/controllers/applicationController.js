@@ -6,9 +6,10 @@ exports.createApplication = async (req, res) => {
     const { name, email, phone, text } = req.body;
     const newApplication = await Application.create({ name, email, phone, text });
     
-    // Отправка email менеджеру
-    await sendNewApplicationEmail(newApplication);
-    
+   //  Отправка email менеджеру
+   //  await sendNewApplicationEmail(newApplication);
+   console.log(`Типа почта отправлена, но тут траблы с тем чтобы отправить, нужен почтовый сервер и тд..`); 
+
     res.status(201).json({ 
       message: 'Заявка успешно отправлена!', 
       application: newApplication 
