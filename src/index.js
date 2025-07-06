@@ -1,13 +1,27 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware для работы с JSON
+// Импорт подключения к БД
+require('./config/db');
+
+// Middleware
 app.use(express.json());
+
+// Роуты
+app.use('/api/reviews', require('./routes/reviewRoutes'));
+app.use('/api/applications', require('./routes/applicationRoutes'));
 
 // Тестовый роут
 app.get('/', (req, res) => {
-  res.json({ message: "Hello World! 🌍" });
+  res.json({ 
+    message: "API is working! 🌍",
+    endpoints: {
+      reviews: "/api/reviews",
+      applications: "/api/applications"
+    }
+  });
 });
 
 // Запуск сервера
